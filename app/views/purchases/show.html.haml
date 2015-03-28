@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Store:
+  = @purchase.store_id
+%p
+  %b Delivery method:
+  = @purchase.delivery_method
+%p
+  %b Total cost:
+  = @purchase.total_cost
+
+= link_to 'Edit', edit_purchase_path(@purchase)
+\|
+= link_to 'Back', purchases_path
