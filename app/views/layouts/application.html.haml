@@ -4,9 +4,11 @@
     %title BookShop
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag "https://js.stripe.com/v1/"
     = csrf_meta_tags
   %body
-    %p{:class=> 'notice'}
-    %p{:class=> 'alert'}
-    = yield
-    = render :partial => "shared/footer"
+    = render 'layouts/header'
+    .container
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
+      = yield

@@ -1,0 +1,15 @@
+%body
+  %header
+    .navbar.navbar-default
+      .container
+        #navbar-main.navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li= link_to 'Belépés', new_user_session_path
+            %li= link_to 'Könyvek', books_path
+            %li= link_to 'Vásárlások', purchases_path
+            %li= link_to 'Felhasználók', users_path
+            %li= link_to 'Kiadók', publishers_path
+            %li= link_to 'Műfajok', genres_path
+            %li= link_to 'Szerzők', authors_path
+            %li= link_to 'Boltok', stores_path
+            %li= link_to 'Kijelentkezés', destroy_user_session_path, method: 'delete'

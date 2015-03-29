@@ -3,11 +3,24 @@ class Ability
 
   def initialize(user)
 
+    user ||= User.new # guest user (not logged in)
+
     if user.has_role? :admin
-      can :manage, :all
+
+      can :manage, [Author, Publisher, Book, Genre, SubGenre, Store]
+      can :read, Purchase
+      can :destroy, User
+      cannot :destroy, [Author, Publisher, Book]
+
     elsif user.has_role? :costumer
-      can :read, :all
+
+      can :read, Book, Genre, SubGenre, Author, Publisher, Store
+      can [:new, :create], Purchase
+      can :read, Purchase, :user_id => user.id
+
     else
+
+      can :read, Book, Genre, SubGenre, Author, Publisher, Store
 
     end
 
