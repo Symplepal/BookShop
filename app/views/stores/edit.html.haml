@@ -1,5 +1,9 @@
-%h1 Editing store
-= render 'form'
-= link_to 'Show', @store
+- if params[:form] == 'store'
+  %h1 Bolt szerkesztése
+  = render 'form'
+- elsif params[:form] == 'inventory'
+  %h1 Raktár módosítása
+  = render 'inventory_form'
+= link_to 'Megtekintés', @store
 |
-= link_to 'Back', stores_path
+= link_to 'Vissza', stores_path

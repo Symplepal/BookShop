@@ -7,10 +7,10 @@
   = @book.description
 %p
   %strong Szerző:
-  = @book.author.name
+  =link_to @book.author.name, @book.author
 %p
   %strong Kiadó:
-  = @book.publisher.name
+  =link_to @book.publisher.name, @book.publisher
 %p
   %strong Kiadás dátuma:
   = @book.published_date.strftime('%d-%m-%Y')
@@ -24,7 +24,8 @@
 %p
   %strong Műfajok:
   - @book.genres.each do |genre|
-    = genre.name
-= link_to 'Szerkesztés', edit_book_path(@book)
+    =link_to genre.name, genre
+-if can? :edit, @book
+  = link_to 'Szerkesztés', edit_book_path(@book)
 |
 = link_to 'Vissza', books_path

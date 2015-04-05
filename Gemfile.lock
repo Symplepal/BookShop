@@ -21,7 +21,7 @@ GEM
       activemodel (= 4.1.4)
       activesupport (= 4.1.4)
       arel (~> 5.0.0)
-    activerecord-oracle_enhanced-adapter (1.5.5)
+    activerecord-oracle_enhanced-adapter (1.5.6)
     activesupport (4.1.4)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -29,7 +29,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    autoprefixer-rails (5.1.7.1)
+    autoprefixer-rails (5.1.8)
       execjs
       json
     bcrypt (3.1.10)
@@ -38,6 +38,7 @@ GEM
       sass (>= 3.2.19)
     builder (3.2.2)
     cancancan (1.10.1)
+    cocoon (1.2.6)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -69,7 +70,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     i18n (0.7.0)
-    jbuilder (2.2.11)
+    jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -107,19 +108,19 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
-      json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rolify (4.0.0)
-    ruby-oci8 (2.1.7)
+    ruby-oci8 (2.1.8)
     ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
-    sass (3.2.19)
-    sass-rails (4.0.5)
+    sass (3.4.13)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.2)
-      sprockets (~> 2.8, < 3.0)
-      sprockets-rails (~> 2.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -162,6 +163,7 @@ DEPENDENCIES
   activerecord-oracle_enhanced-adapter
   bootstrap-sass
   cancancan
+  cocoon
   coffee-rails (~> 4.0.0)
   devise
   haml

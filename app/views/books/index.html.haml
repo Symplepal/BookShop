@@ -13,9 +13,12 @@
   %tbody
     - @books.each do |book|
       %tr
-        %td= book.title
-        %td= book.author.name
-        %td= book.publisher.name
+        %td
+          =link_to book.title, book
+        %td
+          =link_to book.author.name, book.author
+        %td
+          =link_to book.publisher.name, book.publisher
         %td= book.published_date.strftime('%d-%m-%Y')
         %td
           = book.price
@@ -23,9 +26,7 @@
         %td= book.page_count
         %td
           - book.genres.each do |genre|
-            = genre.name
-        %td= link_to 'Megtekintés', book
-        %td= link_to 'Szerkesztés', edit_book_path(book)
+            =link_to genre.name, genre
 
 %br/
 = link_to 'Új könyv felvétele', new_book_path

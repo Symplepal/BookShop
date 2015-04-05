@@ -2,6 +2,11 @@
 %p
   %strong Név:
   = @author.name
-= link_to 'Szerkesztés', edit_author_path(@author)
+%p
+  %strong Könyvek:
+  - @author.books.each do |book|
+    = link_to book.title, book
+-if can? :manage, @author
+  = link_to 'Szerkesztés', edit_author_path(@author)
 |
 = link_to 'Vissza', authors_path

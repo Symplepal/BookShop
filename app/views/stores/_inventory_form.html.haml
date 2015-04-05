@@ -1,0 +1,13 @@
+= simple_form_for(@store) do |f|
+  = f.error_notification
+
+  .form-inputs
+    %h3 Könyvek
+  #books_stores
+    = f.simple_fields_for :book_stores do |book_store|
+      = render 'book_store_fields', :f => book_store
+    .links
+      = link_to_add_association 'Új könyv felvétele', f, :book_stores
+
+  .form-actions
+    = f.button :submit

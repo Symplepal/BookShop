@@ -35,6 +35,7 @@ gem 'select2-rails'
 gem 'simple_form'
 gem 'cancancan'
 gem 'rolify'
+gem 'cocoon'
 
 
 # Use ActiveModel has_secure_password

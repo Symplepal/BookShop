@@ -1,7 +1,12 @@
 %p#notice= notice
 %p
-  %strong Name:
+  %strong Név:
   = @genre.name
-= link_to 'Edit', edit_genre_path(@genre)
+%p
+  %strong Könyvek:
+  - @genre.books.each do |book|
+    =link_to book.title, book
+- if can? :manage, @genre
+  = link_to 'Edit', edit_genre_path(@genre)
 |
 = link_to 'Back', genres_path
