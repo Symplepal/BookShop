@@ -7,21 +7,20 @@ class Ability
 
     if user.has_role? :admin
 
-      can :manage, [Author, Publisher, Book, Genre, SubGenre, Store]
-      can :read, Purchase
+      can :manage, [Author, Publisher, Book, Genre, Store]
+      can :read, [Purchase, User]
       can :destroy, User
       cannot :destroy, [Author, Publisher, Book]
 
     elsif user.has_role? :costumer
 
-      can :read, Book, Genre, SubGenre, Author, Publisher, Store
+      can :read, [Book, Genre, Author, Publisher, Store]
       can [:new, :create], Purchase
       can :read, Purchase, :user_id => user.id
+      can :manage, user
 
     else
-
-      can :read, Book, Genre, SubGenre, Author, Publisher, Store
-
+      can :read, [Book, Genre, Author, Publisher, Store]
     end
 
     # Define abilities for the passed in user here. For example:

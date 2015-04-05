@@ -4,6 +4,8 @@ class CreateBooksPurchases < ActiveRecord::Migration
       t.belongs_to :book, index: true
       t.belongs_to :purchase, index: true
       t.integer :amount
+
+      t.timestamps
     end
   end
 end

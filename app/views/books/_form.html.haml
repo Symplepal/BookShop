@@ -1,14 +1,18 @@
+%script
+  $(document).ready(function() { $("#book_genre_ids").select2(); });
+
 = simple_form_for(@book) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :title
-    = f.input :author_id
-    = f.input :publisher_id
-    = f.input :published_date, as: :date
-    = f.input :price
-    = f.input :page_count
-    = f.input :genre_id
+    = f.input :title, label: 'Cím'
+    = f.input :description, as: :text, label: 'Leírás'
+    = f.association :author, label: 'Szerző'
+    = f.association :publisher, label: 'Kiadó'
+    = f.input :published_date, as: :date, label: 'Kiadás dátuma'
+    = f.input :price, label: 'Ár'
+    = f.input :page_count, label: 'Oldalszám'
+    = f.association :genres, label: false, :placeholder => 'Műfajok'
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, label: 'Bevitel'

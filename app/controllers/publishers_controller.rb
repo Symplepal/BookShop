@@ -1,5 +1,6 @@
 class PublishersController < ApplicationController
-  before_action :set_publisher, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  # before_action :set_publisher, only: [:show, :edit, :update, :destroy]
 
   # GET /publishers
   # GET /publishers.json

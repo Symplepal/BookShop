@@ -1,3 +1,3 @@
 class Genre < ActiveRecord::Base
-  has_many :sub_genres
+  has_and_belongs_to_many :books
 end

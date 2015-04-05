@@ -4,12 +4,23 @@
       .container
         #navbar-main.navbar-collapse.collapse
           %ul.nav.navbar-nav
-            %li= link_to 'Belépés', new_user_session_path
-            %li= link_to 'Könyvek', books_path
-            %li= link_to 'Vásárlások', purchases_path
-            %li= link_to 'Felhasználók', users_path
-            %li= link_to 'Kiadók', publishers_path
-            %li= link_to 'Műfajok', genres_path
-            %li= link_to 'Szerzők', authors_path
-            %li= link_to 'Boltok', stores_path
-            %li= link_to 'Kijelentkezés', destroy_user_session_path, method: 'delete'
+            - if current_user.nil?
+              %li= link_to 'Belépés', new_user_session_path
+            - if can? :read, Book
+              %li= link_to 'Könyvek', books_path
+            - if can? :read, Purchase
+              %li= link_to 'Vásárlások', purchases_path
+            - if can? :read, User, :all
+              %li= link_to 'Felhasználók', users_path
+            - if can? :read, Publisher
+              %li= link_to 'Kiadók', publishers_path
+            - if can? :read, Genre
+              %li= link_to 'Műfajok', genres_path
+            - if can? :read, Author
+              %li= link_to 'Szerzők', authors_path
+            - if can? :read, Store
+              %li= link_to 'Boltok', stores_path
+            - unless current_user.nil?
+              - if can? :manage, User, :id => current_user.id
+                %li= link_to 'Profil', edit_user_registration_path(current_user)
+              %li= link_to 'Kijelentkezés', destroy_user_session_path, method: 'delete'

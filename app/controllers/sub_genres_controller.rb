@@ -1,5 +1,6 @@
 class SubGenresController < ApplicationController
-  before_action :set_sub_genre, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  # before_action :set_sub_genre, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 

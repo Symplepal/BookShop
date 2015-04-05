@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322114655) do
+ActiveRecord::Schema.define(version: 20150404105831) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -21,24 +21,47 @@ ActiveRecord::Schema.define(version: 20150322114655) do
 
   create_table "books", force: true do |t|
     t.string   "title"
+    t.text     "description"
     t.integer  "author_id",      precision: 38, scale: 0
     t.integer  "publisher_id",   precision: 38, scale: 0
     t.datetime "published_date"
     t.integer  "price",          precision: 38, scale: 0
     t.integer  "page_count",     precision: 38, scale: 0
-    t.integer  "genre_id",       precision: 38, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "books_genres", id: false, force: true do |t|
+    t.integer  "book_id",    precision: 38, scale: 0
+    t.integer  "genre_id",   precision: 38, scale: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "books_genres", ["book_id"], name: "index_books_genres_on_book_id"
+  add_index "books_genres", ["genre_id"], name: "index_books_genres_on_genre_id"
+
   create_table "books_purchases", id: false, force: true do |t|
-    t.integer "book_id",     precision: 38, scale: 0
-    t.integer "purchase_id", precision: 38, scale: 0
-    t.integer "amount",      precision: 38, scale: 0
+    t.integer  "book_id",     precision: 38, scale: 0
+    t.integer  "purchase_id", precision: 38, scale: 0
+    t.integer  "amount",      precision: 38, scale: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "books_purchases", ["book_id"], name: "i_books_purchases_book_id"
   add_index "books_purchases", ["purchase_id"], name: "i_books_purchases_purchase_id"
+
+  create_table "books_stores", id: false, force: true do |t|
+    t.integer  "store_id",   precision: 38, scale: 0
+    t.integer  "book_id",    precision: 38, scale: 0
+    t.integer  "amount",     precision: 38, scale: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "books_stores", ["book_id"], name: "index_books_stores_on_book_id"
+  add_index "books_stores", ["store_id"], name: "index_books_stores_on_store_id"
 
   create_table "genres", force: true do |t|
     t.string   "name"
@@ -74,22 +97,6 @@ ActiveRecord::Schema.define(version: 20150322114655) do
   create_table "stores", force: true do |t|
     t.string   "name"
     t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "stores_books", id: false, force: true do |t|
-    t.integer "store_id", precision: 38, scale: 0
-    t.integer "book_id",  precision: 38, scale: 0
-    t.integer "amount",   precision: 38, scale: 0
-  end
-
-  add_index "stores_books", ["book_id"], name: "index_stores_books_on_book_id"
-  add_index "stores_books", ["store_id"], name: "index_stores_books_on_store_id"
-
-  create_table "sub_genres", force: true do |t|
-    t.string   "name"
-    t.integer  "genre_id",   precision: 38, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
