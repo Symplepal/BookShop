@@ -1,10 +1,17 @@
 = simple_form_for(@purchase) do |f|
   = f.error_notification
 
+
   .form-inputs
-    = f.input :store_id
-    = f.input :delivery_method
-    = f.input :total_cost
+    %h3 Könyvek
+    #books_stores
+      = f.simple_fields_for :book_purchases do |book_purchase|
+        = render 'book_purchase_fields', :f => book_purchase
+      .links
+        = link_to_add_association 'Új könyv hozzáadása a kosárba', f, :book_purchases
+    = f.input :delivery_method, collection: ['Házhozszállítás', 'Bolti átvétel']
+
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, name: "submit_button",value: "update"
+    = f.button :submit, name: "submit_button",value: "close"

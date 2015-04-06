@@ -18,13 +18,14 @@ admin = User.create!(email: 'admin@example.com',
 
 admin.add_role :admin
 
-costumer = User.create!(email: 'costumer@example.com',
-                     name: 'Costumer',
+customer = User.create!(email: 'customer@example.com',
+                     name: 'Customer',
                      password: '12345678',
                      password_confirmation: '12345678'
 )
-
-costumer.add_role :costumer
+customer.purchases << Purchase.new(state: 'open')
+customer.save!
+customer.add_role :customer
 
 #Publisher seed
 
@@ -64,6 +65,7 @@ genres = Genre.create!([{name: 'Fantasy'},
 #Stores seed
 
 Store.destroy_all
+BookStore.destroy_all
 
 stores = Store.create!([{name: 'Szegedi Könyvesbolt', address: '6734 Szeged, Pál utca 4.'},
                         {name: 'Pesti Könyvesbolt', address: '1334 Budapest, Szent István tér 3.'},])
@@ -138,3 +140,15 @@ books = Book.create!([{title: 'A Dance with Dragons',
                        The Harry Potter Boxed Set includes hardcover editions of Harry Potter and the Sorcerer\'s Stone, Harry Potter and the Chamber of Secrets, Harry Potter and the Prisoner of Azkaban,
                        Harry Potter and the Goblet of Fire, Harry Potter and the Order of the Phoenix, Harry Potter and the Half-Blood Prince, and Harry Potter and the Deathly Hallows. The books come snugly packed in a decorative,
                        trunk-like box with sturdy handles and a privacy lock -- and includes decorative stickers!'},])
+
+BookStore.create!([{book: Book.find_by(title: 'A Dance with Dragons'), store: Store.find_by(name: 'Szegedi Könyvesbolt'), quantity: 30},
+                   {book: Book.find_by(title: 'The Call of Cthulhu'), store: Store.find_by(name: 'Szegedi Könyvesbolt'), quantity: 15},
+                   {book: Book.find_by(title: 'The Complete Sherlock Holmes'), store: Store.find_by(name: 'Szegedi Könyvesbolt'), quantity: 42},
+                   {book: Book.find_by(title: 'Cook with Jamie'), store: Store.find_by(name: 'Szegedi Könyvesbolt'), quantity: 10},
+                   {book: Book.find_by(title: 'Harry Potter Boxset'), store: Store.find_by(name: 'Szegedi Könyvesbolt'), quantity: 13},
+                   {book: Book.find_by(title: 'A Dance with Dragons'), store: Store.find_by(name: 'Pesti Könyvesbolt'), quantity: 23},
+                   {book: Book.find_by(title: 'The Call of Cthulhu'), store: Store.find_by(name: 'Pesti Könyvesbolt'), quantity: 34},
+                   {book: Book.find_by(title: 'The Complete Sherlock Holmes'), store: Store.find_by(name: 'Pesti Könyvesbolt'), quantity: 8},
+                   {book: Book.find_by(title: 'Cook with Jamie'), store: Store.find_by(name: 'Pesti Könyvesbolt'), quantity: 2},
+                   {book: Book.find_by(title: 'Harry Potter Boxset'), store: Store.find_by(name: 'Pesti Könyvesbolt'), quantity: 5},
+                   ])

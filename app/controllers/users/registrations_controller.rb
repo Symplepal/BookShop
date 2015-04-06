@@ -5,8 +5,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
 
+    resource.purchases << Purchase.new(state: 'open')
+
     if resource.save
-      resource.add_role :costumer
+      resource.add_role :customer
+
     end
   end
 

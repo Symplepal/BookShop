@@ -5,6 +5,7 @@ class PurchasesController < ApplicationController
   respond_to :html
 
   def index
+
     @purchases = Purchase.all
     respond_with(@purchases)
   end
@@ -28,8 +29,36 @@ class PurchasesController < ApplicationController
   end
 
   def update
-    @purchase.update(purchase_params)
-    respond_with(@purchase)
+    not_enough_book_error = false
+
+   params[:purchase][:book_purchases_attributes].each do |key, book_purchase|
+      inventory = BookStore.where("book_id = ? AND quantity >= ? ", book_purchase[:book_id], book_purchase[:quantity]).first
+      if inventory.nil?
+        not_enough_book_error = true
+      end
+    end
+
+    if not_enough_book_error
+      render action: :edit
+    else
+      @purchase.update(purchase_params)
+      if params[:submit_button] == 'close'
+        @purchase.book_purchases.each do |book_purchase|
+          inventory = BookStore.where("book_id = ? AND quantity >= ? ", book_purchase.book_id, book_purchase.quantity).first
+          inventory.quantity -= book_purchase.quantity
+          inventory.save!
+        end
+
+        @purchase.state = 'closed'
+        if @purchase.save!
+          current_user.purchases << Purchase.new(state: 'open')
+          current_user.save!
+        end
+
+      end
+      redirect_to edit_purchase_path(@purchase)
+    end
+
   end
 
   def destroy
@@ -43,6 +72,6 @@ class PurchasesController < ApplicationController
     end
 
     def purchase_params
-      params.require(:purchase).permit(:store_id, :delivery_method, :total_cost)
+      params.require(:purchase).permit(:delivery_method, :state, book_purchases_attributes: [:id, :book_id, :purchase_id, :quantity, :_destroy])
     end
 end

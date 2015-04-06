@@ -1,5 +1,5 @@
 .nested-fields
   = f.input :store_id, as: :hidden, input_html: {value: @store.id}
   = f.input :book_id, collection: Book.all, label_method: :title, value_method: :id
-  = f.input :amount
+  = f.input :quantity
   = link_to_remove_association "Könyv levétele a bolt raktárából", f

@@ -8,6 +8,7 @@ class CreateBooks < ActiveRecord::Migration
       t.date :published_date
       t.integer :price
       t.integer :page_count
+      t.string :state
 
       t.timestamps
     end

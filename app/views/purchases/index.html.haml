@@ -3,9 +3,7 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Store
-      %th Delivery method
-      %th Total cost
+      %th Order id
       %th
       %th
       %th
@@ -13,9 +11,8 @@
   %tbody
     - @purchases.each do |purchase|
       %tr
-        %td= purchase.store_id
+        %td= purchase.id
         %td= purchase.delivery_method
-        %td= purchase.total_cost
         %td= link_to 'Show', purchase
         %td= link_to 'Edit', edit_purchase_path(purchase)
         %td= link_to 'Destroy', purchase, :method => :delete, :data => { :confirm => 'Are you sure?' }

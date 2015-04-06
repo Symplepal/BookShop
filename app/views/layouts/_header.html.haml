@@ -8,8 +8,12 @@
               %li= link_to 'Belépés', new_user_session_path
             - if can? :read, Book
               %li= link_to 'Könyvek', books_path
-            - if can? :read, Purchase
-              %li= link_to 'Vásárlások', purchases_path
+            - unless current_user.nil?
+              - if can? :read, Purchase, user_id: current_user.id, state: 'closed'
+                %li= link_to 'Vásárlások', purchases_path
+              -if current_user.has_role? :customer
+                - if can? :read, Purchase, user_id: current_user.id, state: 'open'
+                  %li= link_to 'Kosár', edit_purchase_path(current_user.purchases.find_by(state: 'open').id)
             - if can? :read, User, :all
               %li= link_to 'Felhasználók', users_path
             - if can? :read, Publisher
@@ -21,6 +25,6 @@
             - if can? :read, Store
               %li= link_to 'Boltok', stores_path
             - unless current_user.nil?
-              - if can? :manage, User, :id => current_user.id
+              - if can? :manage, current_user
                 %li= link_to 'Profil', edit_user_registration_path(current_user)
               %li= link_to 'Kijelentkezés', destroy_user_session_path, method: 'delete'

@@ -12,11 +12,12 @@ class Ability
       can :destroy, User
       cannot :destroy, [Author, Publisher, Book]
 
-    elsif user.has_role? :costumer
+    elsif user.has_role? :customer
 
       can :read, [Book, Genre, Author, Publisher, Store]
-      can [:new, :create], Purchase
-      can :read, Purchase, :user_id => user.id
+      # can [:new, :create], Purchase
+      can [:edit, :update], Purchase, user_id: user.id, state: 'open'
+      can :read, Purchase, user_id: user.id, state: 'closed'
       can :manage, user
 
     else

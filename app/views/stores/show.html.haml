@@ -16,7 +16,7 @@
       %tr
         %td
           =link_to book_store.book.title, book_store.book
-        %td= book_store.amount
+        %td= book_store.quantity
 -if can? :manage, @store
   %td= link_to 'Bolt szerkesztése', edit_store_path(@store, form: 'store')
   %td= link_to 'Raktár módosítása', edit_store_path(@store, form: 'inventory')

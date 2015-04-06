@@ -19,10 +19,21 @@ ActiveRecord::Schema.define(version: 20150404105831) do
     t.datetime "updated_at"
   end
 
-  create_table "book_stores", id: false, force: true do |t|
+  create_table "book_purchases", force: true do |t|
+    t.integer  "book_id",     precision: 38, scale: 0
+    t.integer  "purchase_id", precision: 38, scale: 0
+    t.integer  "quantity",    precision: 38, scale: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "book_purchases", ["book_id"], name: "i_book_purchases_book_id"
+  add_index "book_purchases", ["purchase_id"], name: "i_book_purchases_purchase_id"
+
+  create_table "book_stores", force: true do |t|
     t.integer  "store_id",   precision: 38, scale: 0
     t.integer  "book_id",    precision: 38, scale: 0
-    t.integer  "amount",     precision: 38, scale: 0
+    t.integer  "quantity",   precision: 38, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150404105831) do
     t.datetime "published_date"
     t.integer  "price",          precision: 38, scale: 0
     t.integer  "page_count",     precision: 38, scale: 0
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,17 +64,6 @@ ActiveRecord::Schema.define(version: 20150404105831) do
   add_index "books_genres", ["book_id"], name: "index_books_genres_on_book_id"
   add_index "books_genres", ["genre_id"], name: "index_books_genres_on_genre_id"
 
-  create_table "books_purchases", id: false, force: true do |t|
-    t.integer  "book_id",     precision: 38, scale: 0
-    t.integer  "purchase_id", precision: 38, scale: 0
-    t.integer  "amount",      precision: 38, scale: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "books_purchases", ["book_id"], name: "i_books_purchases_book_id"
-  add_index "books_purchases", ["purchase_id"], name: "i_books_purchases_purchase_id"
-
   create_table "genres", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -76,9 +77,9 @@ ActiveRecord::Schema.define(version: 20150404105831) do
   end
 
   create_table "purchases", force: true do |t|
-    t.integer  "store_id",        precision: 38, scale: 0
-    t.integer  "delivery_method", precision: 38, scale: 0
-    t.integer  "total_cost",      precision: 38, scale: 0
+    t.string   "delivery_method"
+    t.string   "state"
+    t.integer  "user_id",         precision: 38, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
