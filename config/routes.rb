@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   resources :purchases
 
-  resources :sub_genres
-
   resources :users
 
   resources :publishers
@@ -18,7 +16,9 @@ Rails.application.routes.draw do
 
   resources :books
 
-  root 'books#index'
+  resources :dashboard
+
+  root 'dashboard#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

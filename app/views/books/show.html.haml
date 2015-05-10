@@ -25,7 +25,14 @@
   %strong Műfajok:
   - @book.genres.each do |genre|
     =link_to genre.name, genre
+
+%p
+  %strong Kapható az alábbi boltjainkban:
+  - @book.stores.each do |store|
+    -if BookStore.where(book: @book, store: store).first.quantity > 0
+      =link_to store.name, store
+
 -if can? :edit, @book
   = link_to 'Szerkesztés', edit_book_path(@book)
-|
+
 = link_to 'Vissza', books_path

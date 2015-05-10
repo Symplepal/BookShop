@@ -36,6 +36,9 @@ gem 'simple_form'
 gem 'cancancan'
 gem 'rolify'
 gem 'cocoon'
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+gem 'ransack'
 
 
 # Use ActiveModel has_secure_password

@@ -9,9 +9,9 @@
         = render 'book_purchase_fields', :f => book_purchase
       .links
         = link_to_add_association 'Új könyv hozzáadása a kosárba', f, :book_purchases
-    = f.input :delivery_method, collection: ['Házhozszállítás', 'Bolti átvétel']
+    = f.input :delivery_method, collection: ['Házhozszállítás', 'Bolti átvétel'], label: 'Szállítási mód'
 
 
   .form-actions
-    = f.button :submit, name: "submit_button",value: "update"
-    = f.button :submit, name: "submit_button",value: "close"
+    = f.button :submit, 'Frissítés', name: "submit_button",value: "Mentes"
+    = f.button :submit, name: "submit_button",value: "Lezaras"

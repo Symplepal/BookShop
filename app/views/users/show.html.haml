@@ -1,15 +1,15 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b Név:
   = @user.name
 %p
-  %b Address:
+  %b Cím:
   = @user.address
 %p
   %b Email:
   = @user.email
 
-= link_to 'Edit', edit_user_path(@user)
+= link_to 'Szerkesztés', edit_user_path(@user)
 \|
-= link_to 'Back', users_path
+= link_to 'Vissza', users_path

@@ -1,22 +1,21 @@
-%h1 Listing purchases
+%h3 Vásárlások
 
 %table.table.table-striped
   %thead
     %tr
-      %th Order id
-      %th
-      %th
+      %th Rendelési szám
+      %th Vásárló
+      %th Dátum
+      %th Összeg
+      %th Szállítási mód
       %th
 
   %tbody
     - @purchases.each do |purchase|
       %tr
         %td= purchase.id
+        %td= purchase.user.name
+        %td= purchase.updated_at
+        %td= purchase.total_cost.to_s + ' Ft'
         %td= purchase.delivery_method
-        %td= link_to 'Show', purchase
-        %td= link_to 'Edit', edit_purchase_path(purchase)
-        %td= link_to 'Destroy', purchase, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Purchase', new_purchase_path
+        %td= link_to 'Kimutatás', purchase

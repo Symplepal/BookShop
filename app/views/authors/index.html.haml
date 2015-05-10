@@ -12,9 +12,6 @@
           =link_to author.name, author
         %td
           = author.books.count
-        -if can? :manage, author
-          %td= link_to 'Edit', edit_author_path(author)
-          %td= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }
 -if can? :create, Author
   %br/
   = link_to 'Új Szerző felvétele', new_author_path

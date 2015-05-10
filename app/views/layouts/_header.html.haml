@@ -4,6 +4,7 @@
       .container
         #navbar-main.navbar-collapse.collapse
           %ul.nav.navbar-nav
+            %li= link_to 'Home', dashboard_index_path
             - if current_user.nil?
               %li= link_to 'Belépés', new_user_session_path
             - if can? :read, Book

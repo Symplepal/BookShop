@@ -1,10 +1,4 @@
-%h3 Kereső
-= search_form_for @q, :builder => SimpleForm::FormBuilder, defaults: {label: false}, url: books_path do |f|
-  = f.input :title_cont, label: 'Könyv címe'
-  = f.input :author_name_cont, label: 'Szerző címe'
-  = f.submit 'Szűrés'
-
-%h1 Könyvek
+%h1 Legújabb könyvek
 %table.table.table-striped
   %thead
     %tr
@@ -33,6 +27,3 @@
         %td
           - book.genres.each do |genre|
             =link_to genre.name, genre
--if can? :create, Book
-  %br/
-  = link_to 'Új könyv felvétele', new_book_path

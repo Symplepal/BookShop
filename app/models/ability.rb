@@ -10,7 +10,9 @@ class Ability
       can :manage, [Author, Publisher, Book, Genre, Store]
       can :read, [Purchase, User]
       can :destroy, User
-      cannot :destroy, [Author, Publisher, Book]
+      cannot :destroy, [Author, Publisher, Book, Genre]
+      can :manage, user
+      cannot :destroy, user
 
     elsif user.has_role? :customer
 

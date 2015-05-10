@@ -12,9 +12,6 @@
           =link_to genre.name, genre
         %td
           = genre.books.count
-        -if can? :manage, genre
-          %td= link_to 'Edit', edit_genre_path(genre)
-          %td= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' }
 - if can? :create, Genre
   %br/
-  = link_to 'New Genre', new_genre_path
+  = link_to 'Új műfaj felvétele', new_genre_path

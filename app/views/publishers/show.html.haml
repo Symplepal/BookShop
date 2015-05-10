@@ -1,7 +1,12 @@
 %p#notice= notice
 %p
-  %strong Name:
+  %strong Név:
   = @publisher.name
-= link_to 'Edit', edit_publisher_path(@publisher)
+%p
+  %strong Könyvek:
+  - @publisher.books.each do |book|
+    = link_to book.title, book
+-if can? :manage, @publisher
+  = link_to 'Szerkesztés', edit_publisher_path(@publisher)
 |
-= link_to 'Back', publishers_path
+= link_to 'Vissza', publishers_path

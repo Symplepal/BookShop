@@ -1,17 +1,19 @@
 %p#notice= notice
 
 %p
+  %b Vásárló:
+  = @purchase.user.name
+
+%p
   %b Könyvek:
   - @purchase.book_purchases.each do |book_purchase|
-    =book_purchase.book.title
+    =book_purchase.book.title.to_s + ' db: ' + book_purchase.quantity.to_s + ' '
 
 %p
-  %b Delivery method:
+  %b Szállítási mód:
   = @purchase.delivery_method
 %p
-  %b Total cost:
+  %b Teljes összeg:
+  = @purchase.total_cost.to_s + ' Ft'
 
-
-= link_to 'Edit', edit_purchase_path(@purchase)
-\|
-= link_to 'Back', purchases_path
+= link_to 'Vissza', purchases_path

@@ -6,12 +6,24 @@ class PurchasesController < ApplicationController
 
   def index
 
-    @purchases = Purchase.all
+    if current_user.has_role? :admin
+      @purchases = Purchase.where(state: 'closed')
+    elsif current_user.has_role? :customer
+      @purchases = Purchase.where(user: current_user, state: 'closed')
+    end
+
     respond_with(@purchases)
   end
 
   def show
-    respond_with(@purchase)
+    @purchase = Purchase.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "szammla"   # Excluding ".pdf" extension.
+      end
+    end
   end
 
   def new
@@ -42,7 +54,7 @@ class PurchasesController < ApplicationController
       render action: :edit
     else
       @purchase.update(purchase_params)
-      if params[:submit_button] == 'close'
+      if params[:submit_button] == 'Lezaras'
         @purchase.book_purchases.each do |book_purchase|
           inventory = BookStore.where("book_id = ? AND quantity >= ? ", book_purchase.book_id, book_purchase.quantity).first
           inventory.quantity -= book_purchase.quantity
