@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations =>'users/registrations'}
 
   resources :purchases
+  post 'purchases/:id', to: 'purchases#add_to_cart', as: 'purchases/add_to_cart'
 
   resources :users
 

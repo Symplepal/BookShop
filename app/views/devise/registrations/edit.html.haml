@@ -1,5 +1,5 @@
 %h2
-  Edit #{resource_name.to_s.humanize}
+  Profil #{resource_name.to_s.humanize}
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = f.error_notification
   .form-inputs
@@ -14,7 +14,7 @@
     = f.input :current_password, hint: "szükséges a jelenlegi jelszó a módosítások jóváhagyásához", required: true
   .form-actions
     = f.button :submit, "Frissítés"
-%h3 Cancel my account
+%h3 Fiók törlése
 %p
-  Unhappy? #{link_to "Fiók törlése", registration_path(resource_name), data: { confirm: "Biztos vagy benne?" }, method: :delete}
+  Nem elégedett? #{link_to "Fiók törlése", registration_path(resource_name), data: { confirm: "Biztos vagy benne?" }, method: :delete}
 = link_to "Vissza", :back

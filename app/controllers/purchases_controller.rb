@@ -40,6 +40,30 @@ class PurchasesController < ApplicationController
     respond_with(@purchase)
   end
 
+  def add_to_cart
+    book = Book.find(params[:book])
+
+    not_enough_book_error = false
+
+      inventory = BookStore.where("book_id = ? AND quantity >= ? ", book.id, 1).first
+      if inventory.nil?
+        not_enough_book_error = true
+      end
+
+    if not_enough_book_error
+      render action: :edit
+    else
+      book_purchase = BookPurchase.where(purchase: current_user.cart, book: book).first
+      if book_purchase.nil?
+        BookPurchase.create!(purchase: current_user.cart, book: book, quantity: 1)
+      else
+        book_purchase.quantity = book_purchase.quantity + 1
+        book_purchase.save!
+      end
+      redirect_to edit_purchase_path(@purchase)
+    end
+  end
+
   def update
     not_enough_book_error = false
 

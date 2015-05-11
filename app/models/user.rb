@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :purchases
 
+  def cart
+    self.purchases.where(state: 'open').first
+  end
+
 end

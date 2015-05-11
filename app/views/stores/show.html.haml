@@ -15,7 +15,7 @@
     - @store.book_stores.each do |book_store|
       %tr
         %td
-          =link_to book_store.book.title, book_store.book
+          =link_to book_store.book.try(:title), book_store.book
         %td= book_store.quantity
 -if can? :manage, @store
   %td= link_to 'Bolt szerkesztése', edit_store_path(@store, form: 'store')

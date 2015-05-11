@@ -33,6 +33,11 @@
         %td
           - book.genres.each do |genre|
             =link_to genre.name, genre
+        -if can? :update, Purchase, user_id: current_user.try(:id), state: 'open'
+          -if book.available
+            %td= link_to 'Kosárba', purchases_add_to_cart_path(current_user.cart.id, :book => book), method: :post
+          -else
+            %td Nem elérhető
 -if can? :create, Book
   %br/
   = link_to 'Új könyv felvétele', new_book_path

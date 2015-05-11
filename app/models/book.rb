@@ -10,4 +10,12 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :publisher
 
+  def available
+    if BookStore.where(book: self).where.not(quantity: 0).count > 0
+      true
+    else
+      false
+    end
+  end
+
 end
